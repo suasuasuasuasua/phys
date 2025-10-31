@@ -1,0 +1,41 @@
+[build-system]
+requires = ["scikit-build-core", "pybind11"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "phys"
+version = "0.1.0"
+description = "My adventure learning physics 1 from the ground up"
+readme = "README.md"
+authors = [{ name = "Justin Hoang", email = "justinhoang@sua.sh" }]
+requires-python = ">=3.11"
+dependencies = ["numpy>=2.3.4"]
+
+[dependency-groups]
+build = ["build>=1.3.0", "pybind11-stubgen>=2.5.5", "ninja>=1.11.1"]
+dev = ["commitizen>=4.9.1", "ruff>=0.14.3", "ipython>=6.0.1"]
+test = ["pytest>=8.4.2"]
+
+# https://scikit-build-core.readthedocs.io/en/stable/reference/configs.html
+[tool.scikit-build]
+build-dir = "build"
+build.verbose = false
+cmake.build-type = "Release"
+wheel.packages = ["python/phys"]
+
+# https://docs.astral.sh/ruff/configuration/
+[tool.ruff]
+target-version = "py311"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_scheme = "pep440"
+version_provider = "pep621"
+update_changelog_on_bump = true
+major_version_zero = true
