@@ -7,7 +7,7 @@
 
         .. autosummary::
            :toctree: _generate
-    
+
 """
 from __future__ import annotations
 __all__: list[str] = list()

@@ -119,31 +119,6 @@ def cmd_clean_full(args: argparse.Namespace) -> None:
         shutil.rmtree(build_dir)
 
 
-def cmd_format(args: argparse.Namespace) -> None:
-    """Run formatting tasks."""
-    print_step("Formatting code")
-
-    # Format C++ files
-    result = subprocess.run(
-        ["find", "src", "-iname", "*.h", "-o", "-iname", "*.cpp"],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-
-    if result.stdout.strip():
-        files = result.stdout.strip().split("\n")
-        run_command(["clang-format", "-i"] + files)
-
-    # Format Python files, ignore errors
-    try:
-        subprocess.run(
-            ["ruff", "format", "src"], stderr=subprocess.DEVNULL, check=False
-        )
-    except FileNotFoundError:
-        pass  # ruff not installed, skip
-
-
 def cmd_install(args: argparse.Namespace) -> None:
     """Install the python package."""
     print_step("Installing python package")
@@ -275,10 +250,6 @@ Examples:
         "clean-full", help="Full clean - remove build directory"
     )
     parser_clean_full.set_defaults(func=cmd_clean_full)
-
-    # Format command
-    parser_format = subparsers.add_parser("format", help="Run formatting tasks")
-    parser_format.set_defaults(func=cmd_format)
 
     # Install command
     parser_install = subparsers.add_parser("install", help="Install the python package")

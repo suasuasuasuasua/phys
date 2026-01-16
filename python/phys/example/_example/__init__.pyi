@@ -7,7 +7,7 @@
 
         .. autosummary::
            :toctree: _generate
-    
+
 """
 from __future__ import annotations
 from . import functions

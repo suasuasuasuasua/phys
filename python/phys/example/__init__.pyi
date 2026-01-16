@@ -7,7 +7,7 @@
 
         .. autosummary::
            :toctree: _generate
-    
+
 """
 from __future__ import annotations
 from phys.example._example import functions
