@@ -10,7 +10,6 @@
 
 """
 from __future__ import annotations
-from . import _core
 from . import example
 from . import math
 __all__: list = ['__doc__', '__version__', 'example', 'math']
