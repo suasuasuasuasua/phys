@@ -117,14 +117,14 @@ TEST(Vector2Test, Unit) {
 }
 TEST(Vector2Test, Angle) {
   math::linalg::Vector2 v1(-2, 3);
-  double ang = math::constants::deg_to_rad(124);
+  double ang = math::constants::deg2rad(124);
 
   // pretty bad estimate from the video of 124 degrees!
   EXPECT_NEAR(v1.angle(), ang, 0.01);
 }
 TEST(Vector2Test, FromMagAng) {
   double magnitude = 2;
-  double angle = math::constants::deg_to_rad(30);
+  double angle = math::constants::deg2rad(30);
 
   math::linalg::Vector2 v1 =
       math::linalg::Vector2::from_mag_ang(magnitude, angle);
