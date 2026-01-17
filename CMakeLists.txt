@@ -19,6 +19,15 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS
 if(CMAKE_EXPORT_COMPILE_COMMANDS)
   set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES
       ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES})
+  
+  # Create symlink to compile_commands.json in project root for clang-tidy
+  # This allows clang-tidy to find the compilation database without -p flag
+  add_custom_target(
+    symlink_compile_commands ALL
+    COMMAND ${CMAKE_COMMAND} -E create_symlink
+            ${CMAKE_BINARY_DIR}/compile_commands.json
+            ${CMAKE_SOURCE_DIR}/compile_commands.json
+    COMMENT "Creating symlink to compile_commands.json in project root")
 endif()
 
 # add the modules

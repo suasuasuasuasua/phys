@@ -6,9 +6,8 @@
     check-merge-conflicts.enable = true;
     clang-format.enable = true;
     clang-tidy = {
-      # TODO: make clang-tidy work again
-      enable = false;
-      entry = "${pkgs.llvmPackages_21.clang-tools}/bin/clang-tidy -p build";
+      enable = true;
+      entry = "${pkgs.llvmPackages_21.clang-tools}/bin/clang-tidy";
     };
     commitizen.enable = true;
     deadnix.enable = true;
