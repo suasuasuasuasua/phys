@@ -24,6 +24,7 @@ if(CMAKE_EXPORT_COMPILE_COMMANDS)
   # This allows clang-tidy to find the compilation database without -p flag
   add_custom_target(
     symlink_compile_commands ALL
+    COMMAND ${CMAKE_COMMAND} -E remove -f ${CMAKE_SOURCE_DIR}/compile_commands.json
     COMMAND ${CMAKE_COMMAND} -E create_symlink
             ${CMAKE_BINARY_DIR}/compile_commands.json
             ${CMAKE_SOURCE_DIR}/compile_commands.json
