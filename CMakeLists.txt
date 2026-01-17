@@ -12,10 +12,16 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS
     ON
     CACHE INTERNAL "")
 
-# NOTE: nix requires extra steps because include folders are in the nix store
-# https://mzhang.io/posts/2022-03-03-clangd-in-nix/
+# NOTE: Nix workaround for clang-tidy and clangd
+# In Nix environments, C++ standard library headers are in the Nix store
+# (e.g., /nix/store/.../include), not in standard system locations.
+# This workaround explicitly adds these paths to compile_commands.json so that
+# clang-tidy and clangd can find them.
 #
-# though, this is not good practice according to cmake docs
+# Reference: https://mzhang.io/posts/2022-03-03-clangd-in-nix/
+#
+# Alternative: Use a CMake toolchain file to properly configure the compiler.
+# However, this simple workaround is sufficient for development tools.
 if(CMAKE_EXPORT_COMPILE_COMMANDS)
   set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES
       ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES})
@@ -26,7 +32,7 @@ if(CMAKE_EXPORT_COMPILE_COMMANDS)
     symlink_compile_commands ALL
     COMMAND ${CMAKE_COMMAND} -E remove -f ${CMAKE_SOURCE_DIR}/compile_commands.json
     COMMAND ${CMAKE_COMMAND} -E create_symlink
-            ${CMAKE_BINARY_DIR}/compile_commands.json
+            build/compile_commands.json
             ${CMAKE_SOURCE_DIR}/compile_commands.json
     COMMENT "Creating symlink to compile_commands.json in project root")
 endif()

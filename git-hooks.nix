@@ -7,7 +7,7 @@
     clang-format.enable = true;
     clang-tidy = {
       enable = true;
-      entry = "${pkgs.llvmPackages_21.clang-tools}/bin/clang-tidy";
+      entry = "${pkgs.llvmPackages_21.clang-tools}/bin/clang-tidy -p build --extra-arg=-I${toString ./.}/inc";
     };
     commitizen.enable = true;
     deadnix.enable = true;
