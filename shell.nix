@@ -2,7 +2,7 @@
 let
   inherit (pkgs.stdenv.hostPlatform) system;
 in
-pkgs.mkShell.override { stdenv = pkgs.clangStdenv; } {
+pkgs.mkShell.override { stdenv = pkgs.llvmPackages_21.stdenv; } {
   inherit (self.checks.${system}.git-hooks-check) shellHook;
   buildInputs = self.checks.${system}.git-hooks-check.enabledPackages;
 
