@@ -36,6 +36,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0 # required for `nix flake show`
+          submodules: recursive
       - name: Install Nix
         uses: cachix/install-nix-action@v31
         with:
