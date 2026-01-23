@@ -1,25 +1,9 @@
-{ pkgs, ... }:
 {
   hooks = {
     action-validator.enable = true;
     actionlint.enable = true;
     check-merge-conflicts.enable = true;
     clang-format.enable = true;
-    clang-tidy-wrapper = {
-      enable = true;
-      entry = "${pkgs.llvmPackages_21.clang-tools}/bin/clang-tidy -p build";
-      files = "\\.(cpp|h)$";
-      types = [
-        "c"
-        "c++"
-        "file"
-        "header"
-        "text"
-      ];
-      language = "system";
-      pass_filenames = true;
-      stages = [ "pre-commit" ];
-    };
     commitizen.enable = true;
     deadnix.enable = true;
     end-of-file-fixer.enable = true;
