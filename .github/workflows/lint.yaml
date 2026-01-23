@@ -57,4 +57,5 @@ jobs:
           python setup.py build
       - name: Flake check
         run: |
-          nix flake check
+          # NOTE: nix flake check runs in a sandboxI
+          nix develop -c pre-commit run -a
