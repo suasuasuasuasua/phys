@@ -5,10 +5,20 @@
     actionlint.enable = true;
     check-merge-conflicts.enable = true;
     clang-format.enable = true;
-    clang-tidy = {
-      # TODO: make clang-tidy work again
-      enable = false;
+    clang-tidy-custom = {
+      enable = true;
       entry = "${pkgs.llvmPackages_21.clang-tools}/bin/clang-tidy -p build";
+      files = "\\.(cpp|h)$";
+      types = [
+        "c"
+        "c++"
+        "file"
+        "header"
+        "text"
+      ];
+      language = "system";
+      pass_filenames = true;
+      stages = [ "pre-commit" ];
     };
     commitizen.enable = true;
     deadnix.enable = true;
