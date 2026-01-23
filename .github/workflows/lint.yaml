@@ -53,7 +53,7 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           python -m pip install -U pip --group build
-          python setup.py build -v
+          python setup.py build
       - name: Flake check
         run: |
           nix flake check
