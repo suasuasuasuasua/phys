@@ -36,8 +36,9 @@ jobs:
           direnv export gha > "$GITHUB_ENV"
       - name: Build and install
         run: |
-          pip install -U pip
-          pip install --group build --group test
+          python -m venv venv
+          source venv/bin/activate
+          pip install -U pip --group build --group test
           python setup.py install
       - name: Test
         run: python setup.py test
