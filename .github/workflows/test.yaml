@@ -42,4 +42,6 @@ jobs:
           pip install -U pip --group build --group test
           python setup.py install
       - name: Test
-        run: python setup.py test
+        run: |
+          source venv/bin/activate
+          python setup.py test
