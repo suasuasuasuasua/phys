@@ -6,70 +6,65 @@
 
 namespace math::linalg {
 Vector2 Vector2::operator+(const Vector2 &other) const {
-  return {x_ + other.x_, y_ + other.y_};
+  return {.x = x + other.x, .y = y + other.y};
 }
 Vector2 Vector2::operator-(const Vector2 &other) const {
-  return {x_ - other.x_, y_ - other.y_};
+  return {.x = x - other.x, .y = y - other.y};
 }
 Vector2 Vector2::operator*(double scalar) const {
-  return {x_ * scalar, y_ * scalar};
+  return {.x = x * scalar, .y = y * scalar};
 }
 Vector2 Vector2::operator/(double scalar) const {
   if (scalar == 0.0) {
     throw std::invalid_argument("Vector division must not be by zero");
   }
-  return {x_ / scalar, y_ / scalar};
+  return {.x = x / scalar, .y = y / scalar};
 }
 Vector2 &Vector2::operator+=(const Vector2 &other) {
-  x_ += other.x_;
-  y_ += other.y_;
+  x += other.x;
+  y += other.y;
   return *this;
 }
 Vector2 &Vector2::operator-=(const Vector2 &other) {
-  x_ -= other.x_;
-  y_ -= other.y_;
+  x -= other.x;
+  y -= other.y;
   return *this;
 }
 Vector2 &Vector2::operator*=(double scalar) {
-  x_ *= scalar;
-  y_ *= scalar;
+  x *= scalar;
+  y *= scalar;
   return *this;
 }
 Vector2 &Vector2::operator/=(double scalar) {
   if (scalar == 0.0) {
     throw std::invalid_argument("Vector division must not be by zero");
   }
-  x_ /= scalar;
-  y_ /= scalar;
+  x /= scalar;
+  y /= scalar;
   return *this;
 }
-Vector2 Vector2::operator-() const { return {-x_, -y_}; }
+Vector2 Vector2::operator-() const { return {.x = -x, .y = -y}; }
 bool operator==(const Vector2 &lhs, const Vector2 &rhs) {
-  return (lhs.x_ == rhs.x_) and (lhs.y_ == rhs.y_);
+  return (lhs.x == rhs.x) and (lhs.y == rhs.y);
 }
 bool operator!=(const Vector2 &lhs, const Vector2 &rhs) {
-  return (lhs.x_ != rhs.x_) or (lhs.y_ != rhs.y_);
+  return (lhs.x != rhs.x) or (lhs.y != rhs.y);
 }
 Vector2 operator*(double scalar, const Vector2 &v) {
-  return {scalar * v.x(), scalar * v.y()};
+  return {.x = scalar * v.x, .y = scalar * v.y};
 }
 Vector2 operator/(double scalar, const Vector2 &v) {
-  return {scalar / v.x(), scalar / v.y()};
+  return {.x = scalar / v.x, .y = scalar / v.y};
 }
-
-double Vector2::x() const { return x_; }
-void Vector2::x(const double &x) { x_ = std::move(x); }
-double Vector2::y() const { return y_; }
-void Vector2::y(const double &y) { y_ = std::move(y); }
 
 std::string Vector2::to_string() {
   std::stringstream ss;
-  ss << "{ " << x_ << ", " << y_ << " }";
+  ss << "{ " << x << ", " << y << " }";
   return ss.str();
 }
 
 double Vector2::mag() const {
-  double magnitude = x_ * x_ + y_ * y_;
+  double magnitude = x * x + y * y;
   return magnitude;
 }
 Vector2 Vector2::unit() const {
@@ -77,12 +72,12 @@ Vector2 Vector2::unit() const {
   return *this / magnitude;
 }
 double Vector2::angle() const {
-  double ang = std::atan2(y_, x_);
+  double ang = std::atan2(y, x);
   return ang;
 }
 Vector2 Vector2::from_mag_ang(double magnitude, double angle) {
   double x = magnitude * std::cos(angle);
   double y = magnitude * std::sin(angle);
-  return {x, y};
+  return {.x = x, .y = y};
 }
 }  // namespace math::linalg
