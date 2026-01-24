@@ -1,10 +1,13 @@
 ---
 Checks: "
   bug-prone-*,
-  cppcoreguidelines-*,
   clang-analyzer-*,
+  cppcoreguidelines-*,
+  -cppcoreguidelines-avoid-magic-numbers,
   modernize-*,
   -modernize-use-trailing-return-type,
+  reability-*,
+  -readability-magic-numbers,
   "
 WarningsAsErrors: ""
 HeaderFilterRegex: ""
