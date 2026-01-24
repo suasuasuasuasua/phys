@@ -13,8 +13,8 @@ TEST(Vector2Test, Add) {
 
   math::linalg::Vector2 v3 = v1 + v2;
 
-  EXPECT_EQ(v3.x(), 4.0);
-  EXPECT_EQ(v3.y(), 6.0);
+  EXPECT_EQ(v3.x, 4.0);
+  EXPECT_EQ(v3.y, 6.0);
 }
 TEST(Vector2Test, AddSelf) {
   math::linalg::Vector2 v1(1.0, 2.0);
@@ -22,8 +22,8 @@ TEST(Vector2Test, AddSelf) {
 
   v1 += v2;
 
-  EXPECT_EQ(v1.x(), 4.0);
-  EXPECT_EQ(v1.y(), 6.0);
+  EXPECT_EQ(v1.x, 4.0);
+  EXPECT_EQ(v1.y, 6.0);
 }
 TEST(Vector2Test, Sub) {
   math::linalg::Vector2 v1(1.0, 2.0);
@@ -31,8 +31,8 @@ TEST(Vector2Test, Sub) {
 
   math::linalg::Vector2 v3 = v1 - v2;
 
-  EXPECT_EQ(v3.x(), -2.0);
-  EXPECT_EQ(v3.y(), -2.0);
+  EXPECT_EQ(v3.x, -2.0);
+  EXPECT_EQ(v3.y, -2.0);
 }
 TEST(Vector2Test, SubSelf) {
   math::linalg::Vector2 v1(1.0, 2.0);
@@ -40,8 +40,8 @@ TEST(Vector2Test, SubSelf) {
 
   v1 -= v2;
 
-  EXPECT_EQ(v1.x(), -2.0);
-  EXPECT_EQ(v1.y(), -2.0);
+  EXPECT_EQ(v1.x, -2.0);
+  EXPECT_EQ(v1.y, -2.0);
 }
 TEST(Vector2Test, Mul) {
   math::linalg::Vector2 v1(1.0, 2.0);
@@ -49,8 +49,8 @@ TEST(Vector2Test, Mul) {
 
   math::linalg::Vector2 v3 = v1 * scalar;
 
-  EXPECT_EQ(v3.x(), 3.0);
-  EXPECT_EQ(v3.y(), 6.0);
+  EXPECT_EQ(v3.x, 3.0);
+  EXPECT_EQ(v3.y, 6.0);
 }
 TEST(Vector2Test, MulSelf) {
   math::linalg::Vector2 v1(1.0, 2.0);
@@ -58,8 +58,8 @@ TEST(Vector2Test, MulSelf) {
 
   v1 *= scalar;
 
-  EXPECT_EQ(v1.x(), 3.0);
-  EXPECT_EQ(v1.y(), 6.0);
+  EXPECT_EQ(v1.x, 3.0);
+  EXPECT_EQ(v1.y, 6.0);
 }
 TEST(Vector2Test, Div) {
   math::linalg::Vector2 v1(3.0, 6.0);
@@ -67,8 +67,8 @@ TEST(Vector2Test, Div) {
 
   math::linalg::Vector2 v3 = v1 / scalar;
 
-  EXPECT_EQ(v3.x(), 1.0);
-  EXPECT_EQ(v3.y(), 2.0);
+  EXPECT_EQ(v3.x, 1.0);
+  EXPECT_EQ(v3.y, 2.0);
 }
 TEST(Vector2Test, DivSelf) {
   math::linalg::Vector2 v1(3.0, 6.0);
@@ -76,8 +76,8 @@ TEST(Vector2Test, DivSelf) {
 
   v1 /= scalar;
 
-  EXPECT_EQ(v1.x(), 1.0);
-  EXPECT_EQ(v1.y(), 2.0);
+  EXPECT_EQ(v1.x, 1.0);
+  EXPECT_EQ(v1.y, 2.0);
 }
 TEST(Vector2Test, DivZero) {
   math::linalg::Vector2 v1(3.0, 6.0);
@@ -86,8 +86,8 @@ TEST(Vector2Test, DivZero) {
   EXPECT_THROW(v1 / scalar, std::invalid_argument);
 
   math::linalg::Vector2 v2 = scalar / v1;
-  EXPECT_EQ(v2.x(), 0);
-  EXPECT_EQ(v2.y(), 0);
+  EXPECT_EQ(v2.x, 0);
+  EXPECT_EQ(v2.y, 0);
 }
 TEST(Vector2Test, Equal) {
   math::linalg::Vector2 v1(3.0, 6.0);
@@ -112,8 +112,8 @@ TEST(Vector2Test, Unit) {
   math::linalg::Vector2 v2 = v1.unit();
   double magnitude = 1300;
 
-  EXPECT_EQ(v2.x(), v1.x() / magnitude);
-  EXPECT_EQ(v2.y(), v1.y() / magnitude);
+  EXPECT_EQ(v2.x, v1.x / magnitude);
+  EXPECT_EQ(v2.y, v1.y / magnitude);
 }
 TEST(Vector2Test, Angle) {
   math::linalg::Vector2 v1(-2, 3);
@@ -128,8 +128,8 @@ TEST(Vector2Test, FromMagAng) {
 
   math::linalg::Vector2 v1 =
       math::linalg::Vector2::from_mag_ang(magnitude, angle);
-  EXPECT_NEAR(v1.x(), std::sqrt(3), 0.001);
-  EXPECT_NEAR(v1.y(), 1.0, 0.001);
+  EXPECT_NEAR(v1.x, std::sqrt(3), 0.001);
+  EXPECT_NEAR(v1.y, 1.0, 0.001);
 }
 TEST(Vector2Test, String) {
   math::linalg::Vector2 v1(1.1, 2.2);
@@ -142,7 +142,7 @@ TEST(Vector2Test, Negation) {
 
   math::linalg::Vector2 v2 = -v1;
 
-  EXPECT_EQ(v2.x(), -3.0);
-  EXPECT_EQ(v2.y(), 4.0);
+  EXPECT_EQ(v2.x, -3.0);
+  EXPECT_EQ(v2.y, 4.0);
 }
 }  // namespace
