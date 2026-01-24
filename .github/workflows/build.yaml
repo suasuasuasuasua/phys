@@ -37,8 +37,6 @@ jobs:
           direnv export gha > "$GITHUB_ENV"
       - name: Build and install
         run: |
-          python -m venv venv
-          source venv/bin/activate
           pip install -U pip --group build
           python setup.py build
   build-container:
