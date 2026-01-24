@@ -1,35 +1,21 @@
-name: Run Flake Linting
+name: "Build"
 on:
+  workflow_dispatch:
   pull_request:
   push:
+    branches:
+      - main
+    paths:
+      - "**/CMakeLists.txt"
+      - "pyproject.toml"
+      - "**/*.h"
+      - "**/*.cpp"
 permissions:
   contents: read
 
 jobs:
-  fmt:
-    name: Run formatters
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0 # required for `nix flake show`
-      - name: Install Nix
-        uses: cachix/install-nix-action@v31
-        with:
-          nix_path: nixpkgs=channel:nixos-25.11
-      - name: Install direnv
-        run: |
-          curl -sfL https://direnv.net/install.sh | bash
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-      - name: Load environment variables
-        run: |
-          direnv allow .
-          direnv export gha > "$GITHUB_ENV"
-      - name: Flake check
-        run: nix fmt
-  check:
-    name: Run linters
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -49,12 +35,36 @@ jobs:
         run: |
           direnv allow .
           direnv export gha > "$GITHUB_ENV"
-      - name: Build
+      - name: Build and install
         run: |
           python -m venv venv
           source venv/bin/activate
-          python -m pip install -U pip --group build
+          pip install -U pip --group build
           python setup.py build
-      - name: Flake check
+  build-container:
+    name: Build Container
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # required for `nix flake show`
+          submodules: recursive
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          nix_path: nixpkgs=channel:nixos-25.11
+      - name: Install direnv
         run: |
-          nix flake check
+          curl -sfL https://direnv.net/install.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Load environment variables
+        run: |
+          direnv allow .
+          direnv export gha > "$GITHUB_ENV"
+      - name: Build and install
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -U pip
+          python setup.py build-container

@@ -10,6 +10,7 @@ FROM quay.io/pypa/manylinux_2_28_${PLATFORM_ARCH}
 WORKDIR /app
 
 RUN dnf update -y && dnf install -y \
+	clang-tools-extra \
 	cmake \
 	git \
 	make \
