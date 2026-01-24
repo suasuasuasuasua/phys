@@ -51,8 +51,6 @@ jobs:
           direnv export gha > "$GITHUB_ENV"
       - name: Build
         run: |
-          python -m venv venv
-          source venv/bin/activate
           python -m pip install -U pip --group build
           python setup.py build
       - name: Flake check
