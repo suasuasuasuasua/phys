@@ -3,6 +3,7 @@
 
 #define _USE_MATH_DEFINES
 #include <cmath>
+#include <numbers>
 
 namespace math::constants {
 /**
@@ -11,7 +12,9 @@ namespace math::constants {
  * @param ang the angle expressed in degrees
  * @return the angle expreesed in radians
  */
-constexpr double deg2rad(double ang) { return ang * (M_PI / 180.0); }
+constexpr double deg2rad(double ang) {
+  return ang * (std::numbers::pi / 180.0);
+}
 }  // namespace math::constants
 
 #endif  // INCLUDE_MATH_CONSTANTS_H_

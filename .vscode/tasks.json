@@ -1,0 +1,53 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "setup.py build (ucrt64)",
+      "type": "shell",
+      "command": "/ucrt64/bin/python3 ./setup.py build",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "MSYSTEM": "UCRT64",
+          "CHERE_INVOKING": "1"
+        },
+        "shell": {
+          "executable": "C:/msys64/usr/bin/bash.exe",
+          "args": [
+            "-lc"
+          ]
+        }
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "setup.py install (ucrt64)",
+      "type": "shell",
+      "command": "/ucrt64/bin/python3 ./setup.py install",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "MSYSTEM": "UCRT64",
+          "CHERE_INVOKING": "1"
+        },
+        "shell": {
+          "executable": "C:/msys64/usr/bin/bash.exe",
+          "args": [
+            "-lc"
+          ]
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "setup.py build+install (ucrt64)",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "setup.py build (ucrt64)",
+        "setup.py install (ucrt64)"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}
