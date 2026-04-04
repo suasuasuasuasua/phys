@@ -1,10 +1,28 @@
 cmake_minimum_required(VERSION 3.15)
+
+# Fallbacks for direct CMake invocation outside scikit-build.
+if(NOT DEFINED SKBUILD_PROJECT_NAME)
+  set(SKBUILD_PROJECT_NAME phys)
+endif()
+
+if(NOT DEFINED SKBUILD_PROJECT_VERSION)
+  set(SKBUILD_PROJECT_VERSION 0.0.0)
+endif()
+
 project(
   ${SKBUILD_PROJECT_NAME}
   VERSION ${SKBUILD_PROJECT_VERSION}
   LANGUAGES CXX)
 
-set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
+option(PHYS_ENABLE_CLANG_TIDY "Enable clang-tidy during C++ compilation" OFF)
+if(PHYS_ENABLE_CLANG_TIDY)
+  find_program(CLANG_TIDY_EXE NAMES clang-tidy)
+  if(CLANG_TIDY_EXE)
+    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}")
+  else()
+    message(WARNING "PHYS_ENABLE_CLANG_TIDY is ON, but clang-tidy was not found.")
+  endif()
+endif()
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic")
 set(CMAKE_CXX_STANDARD 20)
